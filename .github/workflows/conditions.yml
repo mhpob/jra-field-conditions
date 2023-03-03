@@ -21,11 +21,10 @@ jobs:
           packages: |
             any::rvest
 
-      - name: R R script
+      - name: Run R script
         run: |
           Rscript "min_forecast.R"
-          Rscript -e "rmd = min_forecast('rmd', 'stage')"
-          Rscript -e "hrk = min_forecast('hrk', 'flow')"
+          Rscript -e "Sys.setenv(rmd = min_forecast('rmd', 'stage'), hrk = min_forecast('hrk', 'flow'))"
         
       - name: test
         if: ${{ env.rmd < 5.5 }}

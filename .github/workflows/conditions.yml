@@ -19,7 +19,7 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           packages: |
-          any::rvest
+            any::rvest
 
       - name: R R script
         run: |

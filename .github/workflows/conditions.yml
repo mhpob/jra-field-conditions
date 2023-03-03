@@ -24,7 +24,8 @@ jobs:
       - name: Run R script
         run: |
           source('min_forecast.R')
-          Sys.setenv(rmd = min_forecast('rmd', 'stage'), hrk = min_forecast('hrk', 'flow'))
+          rmd = min_forecast('rmd', 'stage')
+          Sys.setenv(hrk = min_forecast('hrk', 'flow'))
         shell: Rscript {0}
         
       - name: test stage

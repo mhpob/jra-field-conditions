@@ -25,18 +25,17 @@ jobs:
         run: |
           source('min_forecast.R')
           rmd = min_forecast('rmd', 'stage')
-          Sys.setenv(hrk = min_forecast('hrk', 'flow'))
+          hrk = min_forecast('hrk', 'flow')
         shell: Rscript {0}
         
-      - name: test stage
-        if: ${{ env.rmd < 5.5 }}
-        run: echo "Yes!"
+      - name: CINotify Email RMD
+        if: ${{ env.rmd < 5.5}}
+        uses: cinotify/github-action@v1.1.0
+        to: 'mikeob9@gmail.com'
+        subject: 'Get ready to go sampling at!'
+        body: 'Richmond-Westham is forecast to be <5.5 ft.'
         
-      - name: test flow
-        if: ${{ env.hrk < 5 }}
-        run: echo "Yes times two!"
-
-# - name: CINotify Email
-#   if: ${{ env.rmd < 5.5}}
-#   uses: cinotify/github-action@v1.1.0
-
+      # - name: CINotify Email HRK
+      #   if: ${{ env.rmd < 5.5 }}
+      #   uses: cinotify/github-action@v1.1.0
+        

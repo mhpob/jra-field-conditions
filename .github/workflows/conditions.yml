@@ -35,7 +35,7 @@ jobs:
           to: 'mikeob9@gmail.com'
           subject: 'Get ready to go sampling!'
           body: |
-            Richmond-Westham is forecast to be ${{ env.rmd }} ft.
+            join([{Richmond-Westham is forecast to be}, ${{ env.rmd }}, {ft.}])
             Holcomb Rock is forecast to be $env.hrk kcfs.
             Erin, this is an automated email. Contact Mike to get rid of it.
         

@@ -23,8 +23,9 @@ jobs:
 
       - name: Run R script
         run: |
-          Rscript "min_forecast.R"
-          Rscript -e "Sys.setenv(rmd = min_forecast('rmd', 'stage'), hrk = min_forecast('hrk', 'flow'))"
+          source('min_forecast.R')
+          Sys.setenv(rmd = min_forecast('rmd', 'stage'), hrk = min_forecast('hrk', 'flow'))
+        shell: Rscript {0}
         
       - name: test
         if: ${{ env.rmd < 5.5 }}

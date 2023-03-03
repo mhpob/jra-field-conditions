@@ -27,9 +27,13 @@ jobs:
           Sys.setenv(rmd = min_forecast('rmd', 'stage'), hrk = min_forecast('hrk', 'flow'))
         shell: Rscript {0}
         
-      - name: test
+      - name: test stage
         if: ${{ env.rmd < 5.5 }}
         run: echo "Yes!"
+        
+      - name: test flow
+        if: ${{ env.hrk < 5 }}
+        run: echo "Yes times two!"
 
 # - name: CINotify Email
 #   if: ${{ env.rmd < 5.5}}

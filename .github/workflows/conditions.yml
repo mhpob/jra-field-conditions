@@ -31,9 +31,10 @@ jobs:
       - name: CINotify Email RMD
         if: ${{ env.rmd < 5.5}}
         uses: cinotify/github-action@v1.1.0
-        to: 'mikeob9@gmail.com'
-        subject: 'Get ready to go sampling at!'
-        body: 'Richmond-Westham is forecast to be <5.5 ft.'
+        with:
+          to: 'mikeob9@gmail.com'
+          subject: 'Get ready to go sampling at!'
+          body: 'Richmond-Westham is forecast to be <5.5 ft.'
         
       # - name: CINotify Email HRK
       #   if: ${{ env.rmd < 5.5 }}

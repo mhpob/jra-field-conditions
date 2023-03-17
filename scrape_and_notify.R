@@ -28,35 +28,29 @@ limits <- data.frame(name = c('flow', 'stage'),
                      limit = c(5.5, 5))
 
 
-
-
-create_smtp_creds_file('test_creds_file',
-                       'mikeob9@gmail.com',
-                       provider = 'gmail')
-
 if(min(forecast[forecast$name == 'stage', 'value']) < 5.5){
-compose_email(
-  body = md(
-    c(
-      'Richmond-Westham is predicted to hit a minimum of ',
-      {min(forecast[forecast$name == "stage", "value"])},
-      ' feet in the next three days.\n',
-      {forecast |>
-          pivot_wider(id_cols = date)|> 
-          gt() |> 
-          as_raw_html()},
-      add_ggplot(ggplot(data = forecast) +
-                   geom_line(aes(x = date, y = value)) +
-                   geom_hline(data = limits,
-                              aes(yintercept = limit), color = 'red')+
-                   facet_wrap(~name, ncol = 1) +
-                   labs(x = NULL, y = 'Value') +
-                   theme_minimal())
+  compose_email(
+    body = md(
+      c(
+        'Richmond-Westham is predicted to hit a minimum of ',
+        {min(forecast[forecast$name == "stage", "value"])},
+        ' feet in the next three days.\n',
+        {forecast |>
+            pivot_wider(id_cols = date)|> 
+            gt() |> 
+            as_raw_html()},
+        add_ggplot(ggplot(data = forecast) +
+                     geom_line(aes(x = date, y = value)) +
+                     geom_hline(data = limits,
+                                aes(yintercept = limit), color = 'red')+
+                     facet_wrap(~name, ncol = 1) +
+                     labs(x = NULL, y = 'Value') +
+                     theme_minimal())
+      )
     )
-  )
-) |> 
+  ) |> 
     smtp_send(
-      to = 'obrien@umces.edu',
+      to = 'ereilly@thejamesriver.org',
       from = c("GitHub Actions Script Robot" = "mikeob9@gmail.com"),
       subject = 'Get ready to go sampling!',
       credentials = {

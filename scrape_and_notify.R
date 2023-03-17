@@ -28,7 +28,7 @@ limits <- data.frame(name = c('flow', 'stage'),
                      limit = c(5.5, 5))
 
 
-if(min(forecast[forecast$name == 'stage', 'value']) < 5.5){
+if(min(forecast[forecast$name == 'stage', 'value']) <= 5.5){
   compose_email(
     body = md(
       c(
